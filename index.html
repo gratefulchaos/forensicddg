@@ -1,0 +1,561 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forensic Digital Document Group — Deep forensic examination of digital documents</title>
+<meta name="description" content="Forensic Digital Document Group provides deep metadata analysis, signature integrity assessment, and tamper detection for litigators, in-house counsel, and corporate compliance teams.">
+<style>
+  :root {
+    --navy:      #1f3a5e;
+    --navy-deep: #142943;
+    --navy-soft: #2a4a73;
+    --green:     #6b9d6e;
+    --green-deep:#4d7a51;
+    --ink:       #1a1d23;
+    --slate:     #475467;
+    --muted:     #6b7280;
+    --line:      #e5e7eb;
+    --bg:        #ffffff;
+    --bg-soft:   #f7f8fa;
+    --bg-warm:   #fbfaf6;
+    --accent:    #c79b3a;       /* trademark-y warm gold for occasional highlight */
+    --shadow:    0 12px 28px -10px rgba(20, 41, 67, 0.18);
+    --shadow-sm: 0 2px 6px -1px rgba(20, 41, 67, 0.10);
+    --radius:    10px;
+    --radius-sm: 6px;
+    --max-w:     1180px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--navy); text-decoration: none; }
+  a:hover { color: var(--green-deep); }
+
+  .container {
+    width: 100%;
+    max-width: var(--max-w);
+    padding: 0 28px;
+    margin: 0 auto;
+  }
+
+  /* ---------- TOP NAV ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: saturate(120%) blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+    gap: 24px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 0 0 auto;
+  }
+  .brand img { height: 64px; width: auto; display: block; }
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+  .nav a {
+    color: var(--ink);
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+  }
+  .nav a:hover { color: var(--green-deep); }
+  .cta-btn {
+    background: var(--navy);
+    color: #fff !important;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    letter-spacing: 0.02em;
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+  .cta-btn:hover { background: var(--navy-deep); color: #fff; }
+  .cta-btn.outline {
+    background: transparent;
+    color: var(--navy) !important;
+    border: 1.5px solid var(--navy);
+  }
+  .cta-btn.outline:hover { background: var(--navy); color: #fff !important; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    background:
+      linear-gradient(180deg, var(--bg-soft) 0%, var(--bg) 100%);
+    color: var(--ink);
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero::before {
+    /* faint binary-pattern overlay echoing the logo */
+    content:
+      "01010101 01010101 01010101 01010101 01010101 01010101 01010101 01010101 "
+      "10101010 10101010 10101010 10101010 10101010 10101010 10101010 10101010 "
+      "01010101 01010101 01010101 01010101 01010101 01010101 01010101 01010101 "
+      "10101010 10101010 10101010 10101010 10101010 10101010 10101010 10101010 "
+      "01010101 01010101 01010101 01010101 01010101 01010101 01010101 01010101";
+    position: absolute;
+    inset: 0;
+    color: rgba(31, 58, 94, 0.04);
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    word-spacing: 14px;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    padding: 32px 22px;
+    pointer-events: none;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    padding: 88px 0 96px;
+  }
+  .eyebrow {
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--green-deep);
+    margin-bottom: 18px;
+  }
+  .eyebrow .dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+    margin-right: 10px;
+    transform: translateY(-1px);
+  }
+  .hero h1 {
+    font-size: clamp(2.1rem, 4.4vw, 3.4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    max-width: 900px;
+    margin-bottom: 22px;
+  }
+  .hero h1 .accent {
+    color: var(--green-deep);
+  }
+  .hero p.lead {
+    font-size: 1.18rem;
+    max-width: 740px;
+    color: var(--slate);
+    line-height: 1.55;
+    margin-bottom: 24px;
+  }
+  .hero-notice {
+    max-width: 740px;
+    color: var(--slate);
+    font-size: 1rem;
+    line-height: 1.55;
+    border-left: 3px solid var(--green);
+    padding-left: 16px;
+    margin-bottom: 36px;
+  }
+  .hero-notice a {
+    color: var(--green-deep);
+    font-weight: 600;
+    text-decoration: underline;
+  }
+  .hero-notice a:hover { color: var(--navy); }
+  .hero-cta {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 56px;
+  }
+  .hero-cta .cta-btn {
+    background: var(--navy);
+    color: #fff !important;
+    padding: 14px 26px;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  .hero-cta .cta-btn:hover { background: var(--navy-deep); }
+  .hero-cta .cta-btn.outline {
+    background: transparent;
+    color: var(--navy) !important;
+    border: 1.5px solid var(--navy);
+  }
+  .hero-cta .cta-btn.outline:hover {
+    background: var(--navy);
+    color: #fff !important;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 56px;
+    flex-wrap: wrap;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+  .stat .num {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: var(--navy-deep);
+    letter-spacing: -0.01em;
+  }
+  .stat .label {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* ---------- SECTION CHROME ---------- */
+  section.band {
+    padding: 90px 0;
+  }
+  section.band.soft { background: var(--bg-soft); }
+  section.band.warm { background: var(--bg-warm); }
+  .section-head {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .section-head .eyebrow {
+    color: var(--green-deep);
+  }
+  .section-head h2 {
+    font-size: clamp(1.7rem, 3vw, 2.4rem);
+    font-weight: 800;
+    color: var(--navy-deep);
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+  }
+  .section-head p {
+    color: var(--slate);
+    font-size: 1.08rem;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  /* ---------- SERVICES ---------- */
+  .svc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 22px;
+  }
+  .svc-card {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px 26px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .svc-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+    border-color: #cdd6df;
+  }
+  .svc-icon {
+    width: 46px; height: 46px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--green);
+    margin-bottom: 18px;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+  }
+  .svc-icon svg { width: 24px; height: 24px; }
+  .svc-card h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--navy-deep);
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+  .svc-card p {
+    color: var(--slate);
+    font-size: 0.96rem;
+  }
+  .svc-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--green-deep);
+    background: rgba(107, 157, 110, 0.10);
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+
+  /* ---------- WHY FDDG ---------- */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 28px;
+  }
+  .why-item {
+    padding-left: 26px;
+    position: relative;
+  }
+  .why-item::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 6px;
+    width: 4px; height: calc(100% - 12px);
+    background: linear-gradient(180deg, var(--green), var(--green-deep));
+    border-radius: 4px;
+  }
+  .why-item h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--navy-deep);
+    margin-bottom: 10px;
+  }
+  .why-item p {
+    color: var(--slate);
+    font-size: 0.98rem;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .about .copy h2 {
+    font-size: clamp(1.7rem, 3vw, 2.3rem);
+    font-weight: 800;
+    color: var(--navy-deep);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 22px;
+  }
+  .about .copy p {
+    color: var(--slate);
+    font-size: 1.05rem;
+    margin-bottom: 16px;
+  }
+  .about .copy p strong { color: var(--navy-deep); }
+  .about .card {
+    background: var(--bg);
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--navy);
+    border-radius: var(--radius);
+    padding: 38px;
+    box-shadow: var(--shadow);
+  }
+  .about .card .label {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green-deep);
+    margin-bottom: 8px;
+  }
+  .about .card h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--navy-deep);
+    margin-bottom: 18px;
+    line-height: 1.25;
+  }
+  .about .card p {
+    color: var(--slate);
+    font-size: 0.98rem;
+    margin-bottom: 24px;
+  }
+  .about .card .meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 22px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-size: 0.88rem;
+  }
+  .about .card .meta dt {
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .about .card .meta dd {
+    color: var(--navy-deep);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  /* ---------- CONTACT / CTA ---------- */
+  .contact-band {
+    background: var(--bg-soft);
+    color: var(--ink);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 80px 0;
+    text-align: center;
+  }
+  .contact-band h2 {
+    font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+    font-weight: 800;
+    color: var(--navy-deep);
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+  }
+  .contact-band p {
+    color: var(--slate);
+    font-size: 1.08rem;
+    max-width: 620px;
+    margin: 0 auto 28px;
+  }
+  .contact-cta {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+  }
+  .contact-cta .cta-btn {
+    background: var(--navy);
+    color: #fff !important;
+    padding: 14px 26px;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  .contact-cta .cta-btn:hover { background: var(--navy-deep); }
+  .contact-cta .cta-btn.outline {
+    background: transparent;
+    color: var(--navy) !important;
+    border: 1.5px solid var(--navy);
+  }
+  .contact-cta .cta-btn.outline:hover {
+    background: var(--navy);
+    color: #fff !important;
+  }
+  .contact-meta {
+    margin-top: 38px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 26px 40px;
+    justify-content: center;
+    color: var(--slate);
+    font-size: 0.95rem;
+  }
+  .contact-meta a { color: var(--navy); }
+  .contact-meta a:hover { color: var(--green-deep); }
+  .contact-meta strong { color: var(--navy-deep); font-weight: 600; }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--bg);
+    color: var(--slate);
+    border-top: 1px solid var(--line);
+    padding: 38px 0 28px;
+    font-size: 0.88rem;
+  }
+  .footer-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+    text-align: center;
+  }
+  .footer-inner img {
+    height: 38px;
+    width: auto;
+    opacity: 0.92;
+  }
+  .footer-inner .small { color: var(--muted); font-size: 0.8rem; max-width: 760px; }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 860px) {
+    .nav { display: none; }
+    .hero-inner { padding: 64px 0 72px; }
+    .about { grid-template-columns: 1fr; gap: 36px; }
+    section.band { padding: 64px 0; }
+    .hero-stats { gap: 28px; }
+  }
+  @media (max-width: 480px) {
+    .brand img { height: 48px; }
+    .topbar-inner { padding: 12px 0; }
+    .container { padding: 0 20px; }
+    .stat .num { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ===== TOP NAV ===== -->
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <img src="assets/images/FDDM_Trademark_v1.png" alt="Forensic Digital Document Group">
+      </div>
+      <nav class="nav" aria-label="Main">
+        <a href="mailto:info@forensicddg.com" class="cta-btn">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="eyebrow"><span class="dot"></span>Introducing the Forensic Digital Document Group</div>
+      <h1>The critical evidence may be in the <span class="accent">digital documents.</span></h1>
+      <p class="lead">
+        Forensic Digital Document Group conducts deep examinations of digital
+        documents, scanned exhibits, and electronic records — surfacing the
+        metadata, signature evidence, and revision history litigators need to
+        prove authenticity, tampering, or assembly history.
+      </p>
+      <p class="hero-notice">
+        While we are completing our website, feel free to contact us at
+        <a href="mailto:info@forensicddg.com">info@forensicddg.com</a> or fill out the
+        submission form and we will get back to you.
+      </p>
+      <div class="hero-cta">
+        <a href="mailto:info@forensicddg.com" class="cta-btn">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="container footer-inner">
+      <img src="assets/images/FDDM_Trademark_v1.png" alt="Forensic Digital Document Group">
+      <div>FORENSIC DIGITAL DOCUMENT GROUP<sup>™</sup> &middot; A DBA of Fisher Forensic Document Laboratory, a California corporation.</div>
+      <div class="small">
+        FORENSIC DIGITAL DOCUMENT GROUP and the FDDG logo are trademarks of
+        Fisher Forensic Document Laboratory. All other marks are the property
+        of their respective owners. &copy; <span id="yr">2026</span> Fisher
+        Forensic Document Laboratory. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+<script>
+  // Light-touch interactivity: update copyright year, smooth-scroll nav
+  // already handled via CSS scroll-behavior on <html>.
+  document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
