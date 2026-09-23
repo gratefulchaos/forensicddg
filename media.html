@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Media — Forensic Digital Document Group</title>
+<meta name="description" content="Articles, publications, and press from the Forensic Digital Document Group.">
+<style>
+  :root {
+    --navy:      #1f3a5e;
+    --navy-deep: #142943;
+    --navy-soft: #2a4a73;
+    --green:     #6b9d6e;
+    --green-deep:#4d7a51;
+    --ink:       #1a1d23;
+    --slate:     #475467;
+    --muted:     #6b7280;
+    --line:      #e5e7eb;
+    --bg:        #ffffff;
+    --bg-soft:   #f7f8fa;
+    --accent:    #c79b3a;
+    --shadow:    0 12px 28px -10px rgba(20, 41, 67, 0.18);
+    --shadow-sm: 0 2px 6px -1px rgba(20, 41, 67, 0.10);
+    --radius:    10px;
+    --radius-sm: 6px;
+    --max-w:     1180px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--navy); text-decoration: none; }
+  a:hover { color: var(--green-deep); }
+
+  .container {
+    width: 100%;
+    max-width: var(--max-w);
+    padding: 0 28px;
+    margin: 0 auto;
+  }
+
+  /* ---------- TOP NAV ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: saturate(120%) blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+    gap: 24px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 0 0 auto;
+  }
+  .brand img { height: 92px; width: auto; display: block; }
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+  .nav a {
+    color: var(--ink);
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+  }
+  .nav a:hover { color: var(--green-deep); }
+  .nav a.active { color: var(--green-deep); font-weight: 700; }
+  .cta-btn {
+    background: var(--navy);
+    color: #fff !important;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    letter-spacing: 0.02em;
+    transition: background 0.2s ease;
+  }
+  .cta-btn:hover { background: var(--navy-deep); color: #fff; }
+
+  /* ---------- PAGE HEADER ---------- */
+  .page-head {
+    background: linear-gradient(180deg, var(--bg-soft) 0%, var(--bg) 100%);
+    border-bottom: 1px solid var(--line);
+    padding: 64px 0 56px;
+  }
+  .eyebrow {
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--green-deep);
+    margin-bottom: 14px;
+  }
+  .eyebrow .dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+    margin-right: 10px;
+    transform: translateY(-1px);
+  }
+  .page-head h1 {
+    font-size: clamp(2rem, 4vw, 2.9rem);
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--navy-deep);
+    margin-bottom: 14px;
+  }
+  .page-head p {
+    color: var(--slate);
+    font-size: 1.12rem;
+    max-width: 720px;
+  }
+
+  /* ---------- ARTICLE LIST ---------- */
+  .media-list {
+    padding: 64px 0 90px;
+  }
+  .media-card {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--green);
+    border-radius: var(--radius);
+    padding: 34px 36px;
+    box-shadow: var(--shadow-sm);
+    max-width: 860px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .media-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+  }
+  .media-card .pub-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--green-deep);
+    background: rgba(107, 157, 110, 0.10);
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  .media-card h2 {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: var(--navy-deep);
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    margin-bottom: 10px;
+  }
+  .media-card h2 a { color: inherit; }
+  .media-card h2 a:hover { color: var(--green-deep); }
+  .media-card .byline {
+    color: var(--slate);
+    font-size: 0.98rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .media-card .credit {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 18px;
+  }
+  .media-card p.blurb {
+    color: var(--slate);
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+  .media-card blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 4px 0 4px 18px;
+    margin: 0 0 22px;
+    color: var(--navy-deep);
+    font-size: 1.02rem;
+    font-style: italic;
+    line-height: 1.5;
+  }
+  .media-card blockquote cite {
+    display: block;
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.88rem;
+    font-style: normal;
+  }
+  .media-card .read-link {
+    display: inline-block;
+    background: var(--navy);
+    color: #fff !important;
+    padding: 12px 22px;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    transition: background 0.2s ease;
+  }
+  .media-card .read-link:hover { background: var(--navy-deep); }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--bg);
+    color: var(--slate);
+    border-top: 1px solid var(--line);
+    padding: 38px 0 28px;
+    font-size: 0.88rem;
+  }
+  .footer-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+    text-align: center;
+  }
+  .footer-inner img {
+    height: 38px;
+    width: auto;
+    opacity: 0.92;
+  }
+  .footer-nav {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .footer-nav a { color: var(--navy); font-weight: 600; }
+  .footer-nav a:hover { color: var(--green-deep); }
+  .footer-inner .small { color: var(--muted); font-size: 0.8rem; max-width: 760px; }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 860px) {
+    .page-head { padding: 48px 0 40px; }
+    .media-list { padding: 44px 0 64px; }
+    .media-card { padding: 26px 22px; }
+  }
+  @media (max-width: 480px) {
+    .brand img { height: 68px; }
+    .topbar-inner { padding: 12px 0; }
+    .container { padding: 0 20px; }
+    .nav { gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ===== TOP NAV ===== -->
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <a href="index.html"><img src="assets/images/FDDG_logo_no_circle.png" alt="Forensic Digital Document Group"></a>
+      </div>
+      <nav class="nav" aria-label="Main">
+        <a href="index.html">Home</a>
+        <a href="media.html" class="active">Media</a>
+        <a href="index.html#contact" class="cta-btn">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== PAGE HEADER ===== -->
+  <section class="page-head">
+    <div class="container">
+      <div class="eyebrow"><span class="dot"></span>Media</div>
+      <h1>Publications &amp; press</h1>
+      <p>
+        Articles and coverage on digital document examination — where the
+        discipline is heading, and the work being done to get it there.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== ARTICLES ===== -->
+  <section class="media-list">
+    <div class="container">
+
+      <article class="media-card">
+        <span class="pub-tag">Feature Article</span>
+        <h2>
+          <a href="from-paper-fibers-to-content-streams.html">
+            From Paper Fibers to Content Streams: Evolving FDE Methodology
+            for the Digital Era
+          </a>
+        </h2>
+        <div class="byline">By Ron Lawrence, FHDE</div>
+        <div class="credit">
+          <em>The Examiner</em>, Third Quarter 2026 &middot; Vol.&nbsp;13, Issue&nbsp;3 &middot; safeforensics.org
+        </div>
+        <p class="blurb">
+          As disputed documents increasingly arrive as digital files rather
+          than paper, the examiner's mindset must extend beneath the visible
+          page — to object structure, fonts and content streams, timestamps
+          and revision information — and to the coming challenge of
+          AI-generated handwriting and signatures.
+        </p>
+        <blockquote>
+          &ldquo;I recently attended a presentation by Celeste Makoff of
+          DeepData Forensics on the examination of PDF &lsquo;deep
+          metadata.&rsquo; Her presentation was, for me, an absolute wake-up
+          call.&rdquo;
+          <cite>&mdash; Ron Lawrence, FHDE</cite>
+        </blockquote>
+        <a class="read-link" href="from-paper-fibers-to-content-streams.html">Read the article</a>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="container footer-inner">
+      <img src="assets/images/FDDG_logo_no_circle.png" alt="Forensic Digital Document Group">
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="media.html">Media</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <div>FORENSIC DIGITAL DOCUMENT GROUP<sup>™</sup> &middot; A DBA of Fisher Forensic Document Laboratory, a California corporation.</div>
+      <div class="small">
+        FORENSIC DIGITAL DOCUMENT GROUP and the FDDG logo are trademarks of
+        Fisher Forensic Document Laboratory. All other marks are the property
+        of their respective owners. &copy; <span id="yr">2026</span> Fisher
+        Forensic Document Laboratory. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

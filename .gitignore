@@ -15,3 +15,13 @@ index_v2.html
 .claude/
 Thumbs.db
 .DS_Store
+
+# Business records — receipts, invoices, reimbursements.
+# Contains personal/billing info and this repo is PUBLIC. Never commit.
+_records/
+My Account _ Billing.pdf
+*.pdf
+TODO.md
+
+# Exception: published Media-page articles are meant to go live.
+!assets/media/*.pdf

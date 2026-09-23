@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From Paper Fibers to Content Streams — Forensic Digital Document Group</title>
+<meta name="description" content="From Paper Fibers to Content Streams: Evolving FDE Methodology for the Digital Era, by Ron Lawrence, FHDE. Reprinted with permission from The Examiner, Third Quarter 2026.">
+<style>
+  :root {
+    --navy:      #1f3a5e;
+    --navy-deep: #142943;
+    --navy-soft: #2a4a73;
+    --green:     #6b9d6e;
+    --green-deep:#4d7a51;
+    --ink:       #1a1d23;
+    --slate:     #475467;
+    --muted:     #6b7280;
+    --line:      #e5e7eb;
+    --bg:        #ffffff;
+    --bg-soft:   #f7f8fa;
+    --accent:    #c79b3a;
+    --shadow:    0 12px 28px -10px rgba(20, 41, 67, 0.18);
+    --shadow-sm: 0 2px 6px -1px rgba(20, 41, 67, 0.10);
+    --radius:    10px;
+    --radius-sm: 6px;
+    --max-w:     1180px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--navy); text-decoration: none; }
+  a:hover { color: var(--green-deep); }
+
+  .container {
+    width: 100%;
+    max-width: var(--max-w);
+    padding: 0 28px;
+    margin: 0 auto;
+  }
+
+  /* ---------- TOP NAV ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: saturate(120%) blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+    gap: 24px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 0 0 auto;
+  }
+  .brand img { height: 92px; width: auto; display: block; }
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+  .nav a {
+    color: var(--ink);
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+  }
+  .nav a:hover { color: var(--green-deep); }
+  .nav a.active { color: var(--green-deep); font-weight: 700; }
+  .cta-btn {
+    background: var(--navy);
+    color: #fff !important;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    letter-spacing: 0.02em;
+    transition: background 0.2s ease;
+  }
+  .cta-btn:hover { background: var(--navy-deep); color: #fff; }
+
+  /* ---------- ARTICLE HEADER ---------- */
+  .article-head {
+    background: linear-gradient(180deg, var(--bg-soft) 0%, var(--bg) 100%);
+    border-bottom: 1px solid var(--line);
+    padding: 56px 0 48px;
+  }
+  .article-head .inner { max-width: 860px; }
+  .crumb {
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .crumb a { color: var(--green-deep); }
+  .crumb a:hover { color: var(--navy); }
+  .eyebrow {
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--green-deep);
+    margin-bottom: 14px;
+  }
+  .article-head h1 {
+    font-size: clamp(1.7rem, 3.4vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--navy-deep);
+    margin-bottom: 16px;
+  }
+  .article-head .byline {
+    color: var(--slate);
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .article-head .credit {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-bottom: 22px;
+  }
+  .article-head .credit em { font-style: italic; }
+  .permission {
+    display: inline-block;
+    border-left: 3px solid var(--accent);
+    padding: 6px 0 6px 14px;
+    color: var(--slate);
+    font-size: 0.9rem;
+  }
+  .permission a { font-weight: 600; }
+
+  /* ---------- PDF VIEWER ---------- */
+  .viewer-band { padding: 48px 0 90px; }
+  .viewer-wrap { max-width: 980px; margin: 0 auto; }
+  .viewer-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+  .viewer-actions .cta-btn { font-size: 0.92rem; }
+  .viewer-actions .hint { color: var(--muted); font-size: 0.88rem; }
+  .pdf-frame {
+    width: 100%;
+    height: min(82vh, 1100px);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    background: var(--bg-soft);
+  }
+  .pdf-fallback {
+    padding: 42px 28px;
+    text-align: center;
+    color: var(--slate);
+  }
+  .pdf-fallback a { font-weight: 700; }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--bg);
+    color: var(--slate);
+    border-top: 1px solid var(--line);
+    padding: 38px 0 28px;
+    font-size: 0.88rem;
+  }
+  .footer-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+    text-align: center;
+  }
+  .footer-inner img {
+    height: 38px;
+    width: auto;
+    opacity: 0.92;
+  }
+  .footer-nav {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .footer-nav a { color: var(--navy); font-weight: 600; }
+  .footer-nav a:hover { color: var(--green-deep); }
+  .footer-inner .small { color: var(--muted); font-size: 0.8rem; max-width: 760px; }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 860px) {
+    .article-head { padding: 40px 0 36px; }
+    .viewer-band { padding: 32px 0 64px; }
+    .pdf-frame { height: 70vh; }
+  }
+  @media (max-width: 480px) {
+    .brand img { height: 68px; }
+    .topbar-inner { padding: 12px 0; }
+    .container { padding: 0 20px; }
+    .nav { gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ===== TOP NAV ===== -->
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <a href="index.html"><img src="assets/images/FDDG_logo_no_circle.png" alt="Forensic Digital Document Group"></a>
+      </div>
+      <nav class="nav" aria-label="Main">
+        <a href="index.html">Home</a>
+        <a href="media.html" class="active">Media</a>
+        <a href="index.html#contact" class="cta-btn">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== ARTICLE HEADER ===== -->
+  <section class="article-head">
+    <div class="container">
+      <div class="inner">
+        <div class="crumb"><a href="media.html">&larr; Back to Media</a></div>
+        <div class="eyebrow">Feature Article</div>
+        <h1>From Paper Fibers to Content Streams: Evolving FDE Methodology for the Digital Era</h1>
+        <div class="byline">By Ron Lawrence, FHDE</div>
+        <div class="credit">
+          <em>The Examiner</em>, Third Quarter 2026 &middot; Jul&ndash;Aug&ndash;Sep &middot;
+          Vol.&nbsp;13, Issue&nbsp;3 &middot;
+          <a href="https://safeforensics.org" target="_blank" rel="noopener">safeforensics.org</a>
+        </div>
+        <div class="permission">
+          Reprinted with permission from <em>The Examiner</em>.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PDF VIEWER ===== -->
+  <section class="viewer-band">
+    <div class="container">
+      <div class="viewer-wrap">
+        <div class="viewer-actions">
+          <a class="cta-btn" href="assets/media/TheExaminer_Qtr3_2026_Lawrence.pdf" target="_blank" rel="noopener">Open PDF in a new tab</a>
+          <a class="cta-btn" href="assets/media/TheExaminer_Qtr3_2026_Lawrence.pdf" download>Download PDF</a>
+          <span class="hint">The article is displayed below; use the buttons if your browser doesn't show it.</span>
+        </div>
+        <object
+          class="pdf-frame"
+          data="assets/media/TheExaminer_Qtr3_2026_Lawrence.pdf"
+          type="application/pdf"
+          aria-label="From Paper Fibers to Content Streams — article PDF"
+        >
+          <div class="pdf-fallback">
+            <p>
+              Your browser can't display the PDF inline.<br>
+              <a href="assets/media/TheExaminer_Qtr3_2026_Lawrence.pdf" target="_blank" rel="noopener">Open the article PDF</a>
+              instead.
+            </p>
+          </div>
+        </object>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="container footer-inner">
+      <img src="assets/images/FDDG_logo_no_circle.png" alt="Forensic Digital Document Group">
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="media.html">Media</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <div>FORENSIC DIGITAL DOCUMENT GROUP<sup>™</sup> &middot; A DBA of Fisher Forensic Document Laboratory, a California corporation.</div>
+      <div class="small">
+        FORENSIC DIGITAL DOCUMENT GROUP and the FDDG logo are trademarks of
+        Fisher Forensic Document Laboratory. All other marks are the property
+        of their respective owners. &copy; <span id="yr">2026</span> Fisher
+        Forensic Document Laboratory. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

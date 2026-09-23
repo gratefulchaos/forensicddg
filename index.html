@@ -571,6 +571,14 @@
     width: auto;
     opacity: 0.92;
   }
+  .footer-nav {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .footer-nav a { color: var(--navy); font-weight: 600; }
+  .footer-nav a:hover { color: var(--green-deep); }
   .footer-inner .small { color: var(--muted); font-size: 0.8rem; max-width: 760px; }
 
   /* ---------- RESPONSIVE ---------- */
@@ -607,6 +615,7 @@
         <img src="assets/images/FDDG_logo_no_circle.png" alt="Forensic Digital Document Group">
       </div>
       <nav class="nav" aria-label="Main">
+        <a href="media.html">Media</a>
         <a href="#contact" class="cta-btn">Contact Us</a>
       </nav>
     </div>
@@ -696,6 +705,10 @@
   <footer>
     <div class="container footer-inner">
       <img src="assets/images/FDDG_logo_no_circle.png" alt="Forensic Digital Document Group">
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="media.html">Media</a>
+        <a href="#contact">Contact</a>
+      </nav>
       <div>FORENSIC DIGITAL DOCUMENT GROUP<sup>™</sup> &middot; A DBA of Fisher Forensic Document Laboratory, a California corporation.</div>
       <div class="small">
         FORENSIC DIGITAL DOCUMENT GROUP and the FDDG logo are trademarks of
