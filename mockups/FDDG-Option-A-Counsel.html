@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FDDG — Forensic Digital Document Group (Mockup A · Counsel)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Palette taken from forensicddg.com */
+  :root{
+    --navy:#1f3a5e; --navy-deep:#142943; --navy-soft:#2a4a73;
+    --green:#6b9d6e; --green-deep:#4d7a51; --gold:#c79b3a;
+    --ink:#1a1d23; --slate:#475467; --muted:#6b7280; --line:#e5e7eb;
+    --bg-soft:#f7f8fa; --bg-warm:#fbfaf6;
+    --shadow:0 12px 28px -10px rgba(20,41,67,.18); --shadow-sm:0 2px 6px -1px rgba(20,41,67,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:100px}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-warm);color:var(--slate);line-height:1.7;font-size:16.5px;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:'Libre Baskerville',Georgia,serif;color:var(--navy-deep);font-weight:400}
+  a{color:var(--navy)}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 2rem}
+  .mock-flag{background:var(--navy-deep);color:#fff;text-align:center;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;padding:.35rem}
+  .eyebrow{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--green-deep);font-weight:700;margin-bottom:1rem}
+  .eyebrow::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);margin-right:.6rem;transform:translateY(-2px)}
+
+  nav.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  nav.top .wrap{display:flex;align-items:center;justify-content:space-between;height:86px}
+  .logo-img{height:68px;width:auto;display:block}
+  .nav-links{display:flex;gap:1.9rem;list-style:none;align-items:center}
+  .nav-links a{text-decoration:none;font-size:.93rem;font-weight:500;color:var(--ink)}
+  .nav-links a:hover{color:var(--green-deep)}
+  .nav-links a.cta{background:var(--navy);color:#fff;padding:.55rem 1.1rem;border-radius:6px;font-weight:600}
+  .nav-links a.cta:hover{background:var(--navy-deep)}
+  .nav-toggle{display:none;background:none;border:0;font-size:1.5rem;color:var(--navy);cursor:pointer}
+
+  .btn{display:inline-block;text-decoration:none;padding:.85rem 1.6rem;font-weight:700;font-size:.95rem;border-radius:6px;border:1.5px solid var(--navy);cursor:pointer;font-family:inherit;transition:.2s}
+  .btn-solid{background:var(--navy);color:#fff}
+  .btn-solid:hover{background:var(--navy-deep)}
+  .btn-ghost{color:var(--navy);background:transparent;margin-left:.7rem}
+  .btn-ghost:hover{background:var(--navy);color:#fff}
+  .btn-green{background:var(--green-deep);border-color:var(--green-deep);color:#fff;width:fit-content}
+  .btn-green:hover{background:var(--green);border-color:var(--green)}
+
+  .hero{padding:5.5rem 0 5rem;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fff,var(--bg-warm))}
+  .hero .wrap{display:grid;grid-template-columns:1.25fr 1fr;gap:4rem;align-items:center}
+  .hero h1{font-size:clamp(2.1rem,4vw,3.2rem);line-height:1.2;margin-bottom:1.5rem}
+  .hero h1 em{color:var(--green-deep)}
+  .hero p.lead{font-size:1.1rem;max-width:560px;margin-bottom:2.2rem}
+  .hero-card{background:#fff;border:1px solid var(--line);border-top:3px solid var(--navy);border-radius:10px;padding:2.2rem;box-shadow:var(--shadow)}
+  .hero-card h3{font-size:1.05rem;margin-bottom:1rem}
+  .q-list{list-style:none}
+  .q-list li{padding:.75rem 0;border-top:1px solid var(--line);font-style:italic;font-family:'Libre Baskerville',serif;font-size:.93rem;color:var(--navy)}
+  .q-list li:first-child{border-top:0}
+
+  section{padding:5.5rem 0}
+  .sec-head{max-width:680px;margin-bottom:3rem}
+  .sec-head h2{font-size:clamp(1.8rem,3vw,2.4rem);line-height:1.25;margin-bottom:.9rem}
+
+  .serve-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
+  .serve{background:#fff;border:1px solid var(--line);border-radius:10px;padding:1.7rem;box-shadow:var(--shadow-sm)}
+  .serve .ic{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--navy),var(--navy-soft));display:grid;place-items:center;margin-bottom:1rem}
+  .serve h3{font-size:1rem;margin-bottom:.4rem}
+  .serve p{font-size:.92rem}
+
+  .services{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
+  .svc{padding:2rem 1.8rem;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .svc .num{font-family:'Libre Baskerville',serif;color:var(--gold);font-size:.88rem;margin-bottom:.7rem}
+  .svc h3{font-size:1.04rem;line-height:1.4;margin-bottom:.6rem}
+  .svc p{font-size:.94rem}
+  .svc.wide{grid-column:span 3;display:grid;grid-template-columns:1fr 2fr;gap:2rem;align-items:center;background:var(--navy-deep);color:#c9d3e0}
+  .svc.wide h3{color:#fff}
+  .types{display:flex;flex-wrap:wrap;gap:.5rem}
+  .types span{border:1px solid rgba(255,255,255,.25);padding:.3rem .8rem;font-size:.85rem;border-radius:999px}
+  .cta-bar{margin-top:2.5rem;display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap;background:var(--bg-warm);border:1px solid var(--line);border-left:4px solid var(--green);border-radius:10px;padding:1.4rem 1.8rem}
+  .cta-bar p{font-family:'Libre Baskerville',serif;font-size:1.15rem;color:var(--navy-deep)}
+
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:2.5rem}
+  .step .n{font-family:'Libre Baskerville',serif;font-size:2.4rem;color:var(--gold);opacity:.6;line-height:1}
+  .step h3{font-size:1.04rem;margin:.8rem 0 .5rem}
+  .step p{font-size:.94rem}
+
+  .why{background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.2rem}
+  .why-item{padding-left:1.5rem;position:relative}
+  .why-item::before{content:'';position:absolute;left:0;top:6px;bottom:6px;width:4px;border-radius:4px;background:linear-gradient(180deg,var(--green),var(--green-deep))}
+  .why-item h3{font-size:1.05rem;margin-bottom:.5rem}
+  .why-item p{font-size:.95rem}
+
+  .faq-layout{display:grid;grid-template-columns:1fr 1.6fr;gap:4rem}
+  details{border-top:1px solid var(--line);padding:1.2rem 0}
+  details:last-child{border-bottom:1px solid var(--line)}
+  summary{cursor:pointer;list-style:none;font-family:'Libre Baskerville',serif;color:var(--navy-deep);display:flex;justify-content:space-between;gap:1rem}
+  summary::after{content:'+';color:var(--green-deep);font-size:1.3rem;line-height:1}
+  details[open] summary::after{content:'–'}
+  details p{margin-top:.8rem;font-size:.96rem}
+
+  .about{display:grid;grid-template-columns:1.1fr .9fr;gap:3.5rem;align-items:center;margin-bottom:4.5rem}
+  .about p{margin-bottom:1rem}
+  .about-card{background:#fff;border:1px solid var(--line);border-top:3px solid var(--navy);border-radius:10px;padding:2rem;box-shadow:var(--shadow)}
+  .about-card dl{display:grid;grid-template-columns:1fr 1fr;gap:1rem 1.5rem;font-size:.9rem}
+  .about-card dt{color:var(--muted)}
+  .about-card dd{color:var(--navy-deep);font-weight:600}
+  .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+  .team-card{display:flex;gap:1.5rem;background:#fff;border:1px solid var(--line);border-radius:10px;padding:1.8rem;box-shadow:var(--shadow-sm)}
+  .ph{width:96px;height:120px;flex-shrink:0;border-radius:6px;background:repeating-linear-gradient(45deg,#eef1f5,#eef1f5 6px,#f7f8fa 6px,#f7f8fa 12px);display:flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--muted)}
+  .team-card h3{font-size:1.08rem}
+  .team-card .role{font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;color:var(--green-deep);font-weight:700;margin:.25rem 0 .7rem}
+  .team-card p{font-size:.92rem}
+
+  footer{background:#fff;border-top:1px solid var(--line);padding:2.2rem 0;font-size:.82rem;color:var(--muted)}
+  .f-top{display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.2rem}
+  .f-top img{height:54px}
+  .f-links{display:flex;gap:1.5rem}
+  .f-links a{text-decoration:none;color:var(--ink);font-weight:500}
+  .legal{border-top:1px solid var(--line);padding-top:1.2rem;line-height:1.6}
+
+  @media (max-width:960px){
+    .hero .wrap,.faq-layout,.contact-grid,.team-grid,.about{grid-template-columns:1fr}
+    .svc-grid,.serve-grid{grid-template-columns:1fr 1fr}
+    .svc.wide{grid-column:span 2;grid-template-columns:1fr}
+    .steps,.why-grid{grid-template-columns:1fr 1fr}
+    .or-badge{display:none}
+    .c-left{border-right:0;border-bottom:1px solid rgba(255,255,255,.12)}
+    .nav-links{display:none}
+    .nav-links.open{display:flex;flex-direction:column;position:absolute;top:86px;left:0;right:0;background:#fff;padding:1.5rem 2rem;border-bottom:1px solid var(--line);gap:1.2rem;align-items:flex-start}
+    .nav-toggle{display:block}
+  }
+  @media (max-width:600px){
+    .wrap{padding:0 1.2rem}
+    .logo-img{height:52px}
+    .svc-grid,.serve-grid,.steps,.why-grid,.c-bottom{grid-template-columns:1fr}
+    .svc.wide{grid-column:span 1}
+    .c-left,.c-right{padding:1.6rem}
+    .btn-ghost{margin:.7rem 0 0}
+  }
+</style>
+<link rel="stylesheet" href="fddg-shared.css">
+<style>
+  #contact{background:var(--navy-deep);color:#c9d3e0}
+  #contact .sec-head h2{color:#fff}
+  #contact .sec-head p{color:#c9d3e0}
+  #contact .eyebrow{color:#9cc49f}
+  #contact{
+    --f-surface:rgba(255,255,255,.05); --f-border:rgba(255,255,255,.16); --f-text:#fff; --f-muted:rgba(255,255,255,.68);
+    --f-accent:#8fbf92; --f-accent-text:#0e1f33; --f-accent-soft:rgba(143,191,146,.16); --f-link:#9cc49f;
+    --f-input-bg:#fff; --f-input-border:transparent; --f-input-bg-soft:rgba(255,255,255,.04); --f-hint-bg:rgba(199,155,58,.2);
+  }
+</style>
+</head>
+<body>
+<div class="mock-flag">Mockup A · “Counsel” · plain-language depth · placeholders marked [ ]</div>
+
+<nav class="top">
+  <div class="wrap">
+    <a href="#home"><img class="logo-img" src="FDDG_Logo.png" alt="Forensic Digital Document Group"></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#faq">F.A.Q.</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#">Media</a></li>
+      <li><a href="#contact" class="cta">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu">☰</button>
+  </div>
+</nav>
+
+<header class="hero" id="home">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Forensic Examination of Digital Documents</div>
+      <h1>The critical evidence may be in the <em>digital documents.</em></h1>
+      <p class="lead">Forensic Digital Document Group examines PDFs, Word files, spreadsheets, images, email, and video to establish when, how, and with what a document was made, and whether it has been changed since. Our findings are written for attorneys, investigators, and the courts.</p>
+      <a class="btn btn-solid" href="#contact">Request a Consultation</a>
+      <a class="btn btn-ghost" href="#services">Our Services</a>
+    </div>
+    <aside class="hero-card">
+      <h3>Questions we answer</h3>
+      <ul class="q-list">
+        <li>Was this document really created on the date it shows?</li>
+        <li>What software made it, and was that software available then?</li>
+        <li>What did earlier versions of this file say?</li>
+        <li>Is this digital signature valid, and was the file changed after signing?</li>
+        <li>Do these exhibits come from the same source as the rest of the production?</li>
+      </ul>
+    </aside>
+  </div>
+</header>
+
+<section id="serve">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Who We Serve</div><h2>Trusted where the stakes are highest</h2></div>
+    <div class="serve-grid">
+      <div class="serve"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6b9d6e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3L4 7v5c0 4.4 3.4 8.5 8 9.5 4.6-1 8-5.1 8-9.5V7z"/><path d="M8 12l2.5 2.5L16 9"/></svg></div><h3>Litigation</h3><p>Findings that support authenticity challenges, motions, and testimony.</p></div>
+      <div class="serve"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6b9d6e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div><h3>Corporate Investigations</h3><p>Examination of financial records, contracts, and internal reports.</p></div>
+      <div class="serve"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6b9d6e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><h3>Intellectual Property</h3><p>Authentication of ownership and creation dates for business documents.</p></div>
+      <div class="serve"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6b9d6e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg></div><h3>Compliance &amp; Transactions</h3><p>Verification that records and closing documents are authentic and unaltered.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Core Services</div>
+      <h2>A complete examination of the digital record</h2>
+      <p>Each engagement is scoped to your questions. These are the examinations we perform, alone or in combination.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc"><div class="num">I.</div><h3>Deep Metadata Extraction &amp; Analysis</h3><p>We recover the hidden information stored inside a file, well beyond what “File › Properties” shows, and interpret what it says about the document’s history.</p></div>
+      <div class="svc"><div class="num">II.</div><h3>Software &amp; Version Identification</h3><p>We identify the programs, and their versions, that created the document or worked on it later.</p></div>
+      <div class="svc"><div class="num">III.</div><h3>Revision History &amp; Recovery</h3><p>We trace a file’s revisions and, where the file still holds them, recover deleted or replaced content.</p></div>
+      <div class="svc"><div class="num">IV.</div><h3>Digital Signature &amp; Cryptographic Analysis</h3><p>We verify digital signatures, examine the certificates behind them, and determine whether anything changed after signing.</p></div>
+      <div class="svc"><div class="num">V.</div><h3>Font Analysis &amp; Date Consistency</h3><p>We check whether the fonts embedded in a digital document existed on the date the document claims.</p></div>
+      <div class="svc"><div class="num">VI.</div><h3>Date &amp; Timestamp Analysis</h3><p>We compare the dates in the metadata, the dates printed on the page, and the timestamps recorded deep in the file’s data.</p></div>
+      <div class="svc"><div class="num">VII.</div><h3>Composition &amp; Structure Analysis</h3><p>When one file is assembled from many, such as a declaration with its exhibits, we examine each part on its own, because each can carry its own history.</p></div>
+      <div class="svc"><div class="num">VIII.</div><h3>Embedded Object, Image &amp; Duplicate Asset Analysis</h3><p>We examine images and objects inside a document and identify where the same asset appears elsewhere.</p></div>
+      <div class="svc"><div class="num">IX.</div><h3>Scanned Document &amp; OCR Analysis</h3><p>We examine how a scan was produced and whether its searchable text matches the page image.</p></div>
+      <div class="svc"><div class="num">X.</div><h3>Email Header, Routing &amp; Attachment Analysis</h3><p>We trace an email’s path between servers, check its sending details, and examine its attachments.</p></div>
+      <div class="svc"><div class="num">XI.</div><h3>Case-Wide Correlation &amp; Duplicate Detection</h3><p>We compare documents across one or more productions to find duplicates, shared origins, and inconsistencies.</p></div>
+      <div class="svc"><div class="num">XII.</div><h3>Byte-Level File Examination</h3><p>We examine the raw structure of the file itself to find traces that ordinary tools never display.</p></div>
+      <div class="svc wide">
+        <div><div class="num">XIII.</div><h3>Specialized File Types</h3><p style="margin-top:.5rem">We perform in-depth analysis on all digital file types, including but not limited to:</p></div>
+        <div class="types"><span>PDF</span><span>Word (.docx / .doc)</span><span>Excel</span><span>PowerPoint</span><span>Images (JPG, PNG, HEIC, TIFF)</span><span>Video</span><span>Email (.eml / .msg)</span><span>And more</span></div>
+      </div>
+    </div>
+    <div class="paper-note"><div class="pi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c79b3a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M8 16c1.5-2 2.5 1 4-1s2.5 1 4 0"/></svg></div><div><strong>Paper documents, too.</strong> Through Fisher Forensic Document Laboratory, we also examine physical documents: handwriting and signatures, ink and paper, and alterations to printed originals. Many matters involve both. [Confirm scope with Celeste.]</div></div>
+    <div class="cta-bar"><p>Suspect a document has been altered?</p><a class="btn btn-solid" href="#contact">Get Started →</a></div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Our Process</div>
+      <h2>From a suspicion to a supported finding</h2>
+      <p>A document surfaces in your matter and something about it seems wrong: its form, its timing, or the story of how it appeared. We can help.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="n">01</div><h3>Consultation</h3><p>We discuss your concerns and the documents at issue, at no cost and with no commitment.</p></div>
+      <div class="step"><div class="n">02</div><h3>Preservation &amp; Intake</h3><p>We give you instructions for submitting original files so that nothing in them is altered.</p></div>
+      <div class="step"><div class="n">03</div><h3>Examination &amp; Report</h3><p>We examine the files and deliver a written report that explains each finding in plain terms.</p></div>
+      <div class="step"><div class="n">04</div><h3>Expert Testimony</h3><p>If your matter requires it, our examiner is available to testify to the findings.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Why FDDG</div><h2>Built for matters that end up in court</h2></div>
+    <div class="why-grid">
+      <div class="why-item"><h3>Depth beyond standard tools</h3><p>We examine what ordinary metadata viewers never show: revision layers, embedded fonts, signature data, and the file’s raw structure.</p></div>
+      <div class="why-item"><h3>Confidential by design</h3><p>Your documents stay on our closed systems. We do not send client files to AI services.</p></div>
+      <div class="why-item"><h3>Findings you can use</h3><p>Reports explain each finding in plain terms and cite the evidence behind it, ready for counsel and the court.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap faq-layout">
+    <div class="sec-head">
+      <div class="eyebrow">F.A.Q.</div>
+      <h2>Questions &amp; answers</h2>
+      <p>Don’t see your question? Ask us directly.</p>
+      <a class="btn btn-solid" href="#contact" style="margin-top:1.2rem">Ask a Question</a>
+    </div>
+    <div>
+      <details><summary>What types of files can you examine?</summary><p>All digital file types, including PDF, Word, Excel, PowerPoint, images, email, and video. If you are unsure about a format, tell us what you have.</p></details>
+      <details><summary>Do I need to send the original file?</summary><p>Yes, wherever possible. Printing, scanning, re-saving, or forwarding a file can change or remove the information we examine. We send preservation instructions before you submit anything.</p></details>
+      <details><summary>How long does an examination take?</summary><p>[Standard turnaround to confirm.] Larger or more complex matters take longer, and expedited service is available.</p></details>
+      <details><summary>Are your findings admissible in court?</summary><p>We work with your legal team to lay the evidentiary foundation for our findings. Admissibility requirements vary by jurisdiction.</p></details>
+      <details><summary>How is my data kept confidential?</summary><p>Your files stay on our closed systems and are not sent to AI services. Files are securely destroyed after the engagement ends.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="about" style="padding-top:0">
+  <div class="wrap">
+    <div class="about">
+      <div>
+        <div class="eyebrow">About Us</div>
+        <h2 style="font-size:clamp(1.8rem,3vw,2.3rem);line-height:1.25;margin-bottom:1.2rem">Deep examination of digital documents</h2>
+        <p>Forensic Digital Document Group conducts deep examinations of digital documents, scanned exhibits, and electronic records, surfacing the metadata, signature evidence, and revision history litigators need to prove authenticity, tampering, or assembly history.</p>
+        <p>Every engagement is handled with discretion, from the first consultation through final delivery.</p>
+      </div>
+      <div class="about-card">
+        <div class="eyebrow">At a Glance</div>
+        <dl><dt>Serving</dt><dd>[Region / nationwide]</dd><dt>File types</dt><dd>All digital formats</dd><dt>Consultation</dt><dd>Free</dd><dt>Testimony</dt><dd>Available</dd></dl>
+      </div>
+    </div>
+    <div class="sec-head" id="team"><div class="eyebrow">Who You’ll Work With</div><h2>The people behind each report</h2></div>
+    <div class="people">
+      <div class="person"><div class="ph">Photo</div><h4>[Name]</h4><div class="title">[Title]</div><p>[One or two lines about this person.]</p></div>
+      <div class="person"><div class="ph">Photo</div><h4>[Name]</h4><div class="title">[Title]</div><p>[One or two lines about this person.]</p></div>
+      <div class="person"><div class="ph">Photo</div><h4>[Name]</h4><div class="title">[Title]</div><p>[One or two lines about this person.]</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Contact</div><h2>Tell us about your matter</h2><p>Consultations are free and confidential.</p></div>
+    <div class="inq-layout">
+      <div class="inq-card" id="inquiry"></div>
+      <aside class="inq-aside">
+        <div class="aside-box">
+          <h3>Rather talk it through?</h3>
+          <p>Book a free 15-minute call. We’ll tell you what can be learned from what you have.</p>
+          <a class="btn-aside" href="#">Schedule a Call →</a>
+        </div>
+        <div class="aside-box">
+          <ul class="aside-list">
+            <li><span>Email</span><a href="mailto:info@forensicddg.com">info@forensicddg.com</a></li>
+            <li><span>Phone</span>[(XXX) XXX-XXXX]</li>
+            <li><span>Hours</span>[days, hours] PT</li>
+            <li><span>Response</span>Within 24 hours</li>
+            <li><span>Privacy</span>Files stay between you and your examiner</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="f-top"><img src="FDDG_Logo.png" alt="Forensic Digital Document Group"><div class="f-links"><a href="#">Media</a><a href="#contact">Contact</a><a href="#">Privacy</a><a href="#">Terms</a></div></div>
+    <div class="legal">FORENSIC DIGITAL DOCUMENT GROUP™ · A DBA of Fisher Forensic Document Laboratory, a California corporation.<br>© 2026 Fisher Forensic Document Laboratory. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="fddg-mock.js"></script>
+</body>
+</html>

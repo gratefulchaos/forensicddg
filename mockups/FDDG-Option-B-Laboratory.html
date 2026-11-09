@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FDDG — Forensic Digital Document Group (Mockup B · Laboratory)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* Palette taken from forensicddg.com */
+  :root{
+    --navy:#1f3a5e; --navy-deep:#142943; --navy-soft:#2a4a73; --navy-ink:#0e1f33;
+    --green:#6b9d6e; --green-deep:#4d7a51; --green-l:#9cc49f; --gold:#c79b3a;
+    --ink:#1a1d23; --slate:#475467; --muted:#6b7280; --line:#e5e7eb;
+    --bg-soft:#f7f8fa;
+    --shadow:0 12px 28px -10px rgba(20,41,67,.18); --shadow-sm:0 2px 6px -1px rgba(20,41,67,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:90px}
+  body{font-family:'Inter',system-ui,sans-serif;background:#fff;color:var(--slate);line-height:1.65;font-size:16px;-webkit-font-smoothing:antialiased}
+  .mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+  h1,h2,h3{color:var(--navy-deep);font-weight:800;letter-spacing:-.02em}
+  a{color:var(--navy)}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 2rem}
+  .mock-flag{background:var(--navy-ink);color:var(--green-l);text-align:center;font:500 .74rem 'IBM Plex Mono',monospace;padding:.35rem;letter-spacing:.04em}
+  .tag{font:500 .76rem 'IBM Plex Mono',monospace;color:var(--green-deep);margin-bottom:.6rem}
+
+  nav.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  nav.top .wrap{display:flex;align-items:center;justify-content:space-between;height:78px}
+  .logo-img{height:60px;width:auto;display:block}
+  .nav-links{display:flex;gap:1.7rem;list-style:none;align-items:center;font:500 .84rem 'IBM Plex Mono',monospace}
+  .nav-links a{text-decoration:none;color:var(--slate)}
+  .nav-links a:hover{color:var(--green-deep)}
+  .nav-links a.cta{color:#fff;background:var(--navy);padding:.5rem .95rem;border-radius:6px}
+  .nav-links a.cta:hover{background:var(--navy-deep)}
+  .nav-toggle{display:none;background:none;border:1px solid var(--line);color:var(--navy);padding:.3rem .6rem;cursor:pointer;font-family:'IBM Plex Mono';border-radius:6px}
+
+  .btn{display:inline-block;text-decoration:none;font:600 .86rem 'IBM Plex Mono',monospace;padding:.8rem 1.3rem;border:1.5px solid var(--green);border-radius:6px;cursor:pointer;transition:.2s}
+  .btn-solid{background:var(--green);color:var(--navy-ink)}
+  .btn-solid:hover{background:var(--green-l)}
+  .btn-ghost{color:var(--green-l);margin-left:.6rem;background:transparent}
+  .btn-navy{background:var(--navy);border-color:var(--navy);color:#fff}
+  .btn-navy:hover{background:var(--navy-deep)}
+
+  /* HERO: deep navy band with the live site's binary motif */
+  .hero{position:relative;overflow:hidden;padding:5rem 0 4.5rem;background:linear-gradient(160deg,var(--navy-deep),var(--navy-ink));color:#c9d3e0}
+  .hero::before{content:"01010101 01010101 01010101 01010101 01010101 01010101 01010101 01010101 10101010 10101010 10101010 10101010 10101010 10101010 10101010 10101010 01010101 01010101 01010101 01010101 01010101 01010101 01010101 01010101 10101010 10101010 10101010 10101010 10101010 10101010 10101010 10101010 01010101 01010101 01010101 01010101 01010101 01010101 01010101 01010101 10101010 10101010 10101010 10101010 10101010 10101010 10101010 10101010";position:absolute;inset:0;color:rgba(156,196,159,.06);font:14px/1.9 'IBM Plex Mono',monospace;letter-spacing:.18em;word-spacing:14px;padding:30px 22px;pointer-events:none}
+  .hero .wrap{position:relative;display:grid;grid-template-columns:1fr 1.05fr;gap:3.5rem;align-items:center}
+  .prompt{font:500 .8rem 'IBM Plex Mono',monospace;color:var(--green-l);margin-bottom:1.2rem}
+  .hero h1{color:#fff;font-size:clamp(2rem,3.8vw,3rem);line-height:1.12;margin-bottom:1.3rem}
+  .hero h1 .hl{color:var(--green-l)}
+  .hero p{max-width:540px;margin-bottom:2rem;font-size:1.04rem}
+  .term{background:rgba(14,31,51,.85);border:1px solid rgba(255,255,255,.1);border-radius:10px;overflow:hidden;font:400 .78rem/1.75 'IBM Plex Mono',monospace;box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+  .term-bar{display:flex;gap:.4rem;padding:.6rem .8rem;border-bottom:1px solid rgba(255,255,255,.08);align-items:center;color:#7d8ea5}
+  .term-bar i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.15);display:inline-block}
+  .term-bar span{margin-left:.6rem;font-size:.72rem}
+  .term pre{padding:1rem 1.1rem;white-space:pre;overflow-x:auto;color:#c9d3e0}
+  .c-g{color:var(--green-l)} .c-a{color:#e3bd6a} .c-r{color:#f08c8c} .c-m{color:#7d8ea5}
+  .term-note{font-size:.7rem;color:#7d8ea5;padding:0 1.1rem .8rem}
+
+  section{padding:5rem 0;border-bottom:1px solid var(--line)}
+  section.soft{background:var(--bg-soft)}
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;margin-bottom:2.5rem;flex-wrap:wrap}
+  .sec-head h2{font-size:clamp(1.6rem,2.6vw,2.2rem)}
+  .sec-head p{max-width:460px;color:var(--muted);font-size:.95rem}
+
+  /* WHO WE SERVE strip */
+  .serve{padding:1.6rem 0;border-bottom:1px solid var(--line);background:var(--bg-soft)}
+  .serve .wrap{display:flex;align-items:center;gap:2rem;flex-wrap:wrap;font:500 .8rem 'IBM Plex Mono',monospace}
+  .serve b{color:var(--muted);font-weight:500}
+  .serve span{color:var(--navy-deep)}
+  .serve span::before{content:'▸ ';color:var(--green)}
+
+  /* SERVICES: spec-sheet rows */
+  .filter{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.5rem}
+  .filter button{font:500 .75rem 'IBM Plex Mono',monospace;background:#fff;border:1px solid var(--line);color:var(--slate);padding:.38rem .75rem;cursor:pointer;border-radius:999px}
+  .filter button.on{border-color:var(--navy);background:var(--navy);color:#fff}
+  .spec{border-top:2px solid var(--navy)}
+  .row{display:grid;grid-template-columns:70px 1fr 1.25fr;gap:1.5rem;padding:1.6rem 0;border-bottom:1px solid var(--line)}
+  .row .id{font:600 .82rem 'IBM Plex Mono',monospace;color:var(--gold);padding-top:.15rem}
+  .row h3{font-size:1.06rem;font-weight:700;margin-bottom:.45rem}
+  .row .desc{font-size:.93rem}
+  .row .k{font:600 .66rem 'IBM Plex Mono',monospace;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;margin-bottom:.45rem}
+  .chips{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.8rem}
+  .chips span{font:500 .72rem 'IBM Plex Mono',monospace;color:var(--navy);background:rgba(31,58,94,.06);border:1px solid rgba(31,58,94,.14);padding:.14rem .5rem;border-radius:4px}
+  .ex{font:400 .76rem/1.6 'IBM Plex Mono',monospace;color:var(--green-deep);background:rgba(107,157,110,.08);border-left:3px solid var(--green);padding:.45rem .7rem;border-radius:0 4px 4px 0}
+  .row.hide{display:none}
+  .ftypes{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem}
+  .ftypes div{border:1px solid var(--line);border-radius:6px;padding:.55rem .7rem;font:400 .76rem 'IBM Plex Mono',monospace}
+  .ftypes b{display:block;color:var(--navy-deep);font-weight:600}
+  .ftypes small{color:var(--muted)}
+  .cta-bar{margin-top:2.5rem;display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap;background:var(--navy-deep);border-radius:10px;padding:1.4rem 1.8rem}
+  .cta-bar p{font:500 1rem 'IBM Plex Mono',monospace;color:#fff}
+  .cta-bar p::before{content:'> ';color:var(--green-l)}
+
+  /* METHOD */
+  .method{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+  .method div{background:#fff;border:1px solid var(--line);border-top:3px solid var(--navy);border-radius:10px;padding:1.6rem;box-shadow:var(--shadow-sm)}
+  .method .n{font:600 .75rem 'IBM Plex Mono',monospace;color:var(--green-deep)}
+  .method h3{font-size:1rem;font-weight:700;margin:.6rem 0 .4rem}
+  .method p{font-size:.88rem}
+
+  /* WHY */
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+  .why-item{padding-left:1.4rem;position:relative}
+  .why-item::before{content:'';position:absolute;left:0;top:6px;bottom:6px;width:4px;border-radius:4px;background:linear-gradient(180deg,var(--green),var(--green-deep))}
+  .why-item h3{font-size:1.02rem;font-weight:700;margin-bottom:.45rem}
+  .why-item p{font-size:.93rem}
+
+  /* FAQ */
+  .faq{display:grid;grid-template-columns:1fr 1fr;gap:0 3rem}
+  details{border-top:1px solid var(--line);padding:1.1rem 0}
+  summary{cursor:pointer;list-style:none;color:var(--navy-deep);font-weight:600;display:flex;gap:.8rem}
+  summary::before{content:'>';font-family:'IBM Plex Mono';color:var(--green-deep);transition:.15s}
+  details[open] summary::before{transform:rotate(90deg)}
+  details p{margin:.6rem 0 0 1.3rem;font-size:.92rem}
+
+  footer{background:#fff;border-top:1px solid var(--line);padding:2.2rem 0;font-size:.8rem;color:var(--muted)}
+  .f-top{display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.2rem}
+  .f-top img{height:50px}
+  .f-links{display:flex;gap:1.5rem;font:500 .8rem 'IBM Plex Mono',monospace}
+  .f-links a{text-decoration:none;color:var(--slate)}
+  .legal{border-top:1px solid var(--line);padding-top:1.2rem;line-height:1.6}
+
+  @media (max-width:960px){
+    .hero .wrap,.faq,.contact-grid{grid-template-columns:1fr}
+    .row{grid-template-columns:50px 1fr}
+    .row .tech{grid-column:2}
+    .method{grid-template-columns:1fr 1fr}
+    .why-grid{grid-template-columns:1fr}
+    .ftypes{grid-template-columns:1fr 1fr}
+    .or-badge{display:none}
+    .c-left{border-right:0;border-bottom:1px solid var(--line)}
+    .c-right{border-radius:0 0 12px 12px}
+    .nav-links{display:none}
+    .nav-links.open{display:flex;flex-direction:column;position:absolute;top:78px;left:0;right:0;background:#fff;padding:1.4rem 2rem;border-bottom:1px solid var(--line);align-items:flex-start}
+    .nav-toggle{display:block}
+  }
+  @media (max-width:600px){
+    .wrap{padding:0 1.1rem}
+    .logo-img{height:46px}
+    .row{grid-template-columns:1fr}
+    .row .tech{grid-column:1}
+    .method,.c-bottom{grid-template-columns:1fr}
+    .c-left,.c-right{padding:1.5rem}
+    .btn-ghost{margin:.6rem 0 0}
+    .term{font-size:.66rem}
+  }
+</style>
+<link rel="stylesheet" href="fddg-shared.css">
+<style>
+  #contact{
+    --f-surface:#fff; --f-border:#e5e7eb; --f-text:#142943; --f-muted:#6b7280;
+    --f-accent:#4d7a51; --f-accent-text:#fff; --f-accent-soft:rgba(107,157,110,.10); --f-link:#1f3a5e;
+    --f-input-bg:#fff; --f-input-border:#e5e7eb; --f-input-bg-soft:#f7f8fa; --f-hint-bg:rgba(199,155,58,.13);
+  }
+</style>
+</head>
+<body>
+<div class="mock-flag">MOCKUP B · “LABORATORY” · FULL TECHNICAL DEPTH · PLACEHOLDERS MARKED [ ]</div>
+
+<nav class="top">
+  <div class="wrap">
+    <a href="#home"><img class="logo-img" src="FDDG_Logo.png" alt="Forensic Digital Document Group"></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#services">./services</a></li>
+      <li><a href="#method">./method</a></li>
+      <li><a href="#faq">./faq</a></li>
+      <li><a href="#">./media</a></li>
+      <li><a href="#contact" class="cta">Start a Case</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu">menu</button>
+  </div>
+</nav>
+
+<header class="hero" id="home">
+  <div class="wrap">
+    <div>
+      <div class="prompt">$ fddg examine --deep exhibit_14.pdf</div>
+      <h1>Forensic analysis of digital documents, <span class="hl">down to the byte.</span></h1>
+      <p>Forensic Digital Document Group examines the internal structure of PDFs, Office files, images, email, and video: metadata streams, revision layers, signature containers, embedded fonts, and binary timestamps. We report what the file records about its own history, and where that record contradicts itself.</p>
+      <a class="btn btn-solid" href="#contact">Submit an Inquiry →</a>
+      <a class="btn btn-ghost" href="#services">View Capabilities</a>
+    </div>
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><span>exhibit_14.pdf · structure summary</span></div>
+<pre><span class="c-m">## revisions</span>
+rev 0  %%EOF @ 0x3A1F2  <span class="c-g">Producer: Word for Microsoft 365</span>
+rev 1  %%EOF @ 0x4C810  <span class="c-a">Producer: [PDF editor] · 2 objs replaced</span>
+
+<span class="c-m">## dates</span>
+/Info CreationDate  D:20220314091207-08'00'
+XMP   ModifyDate    2024-06-02T16:44:51-07:00
+      <span class="c-r">▲ 2 yrs after stated execution date</span>
+
+<span class="c-m">## fonts</span>
+ABCDEF+[Typeface]  embedded subset
+      <span class="c-r">▲ font version released after CreationDate</span>
+
+<span class="c-m">## signature</span>
+/ByteRange [0 18342 52112 260404]  rev 0 only
+      <span class="c-a">rev 1 changes fall outside signed range</span></pre>
+      <div class="term-note">// Illustrative output. Not from a real matter.</div>
+    </div>
+  </div>
+</header>
+
+<div class="serve"><div class="wrap"><b>// who we serve</b><span>Litigation</span><span>Corporate investigations</span><span>Intellectual property</span><span>In-house counsel &amp; compliance</span><span>Real estate &amp; transactions</span></div></div>
+
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="tag">// core services</div><h2>Capabilities</h2></div>
+      <p>Each capability lists the artifacts we examine and an example of the kind of finding it can produce. Engagements combine whichever examinations the questions require.</p>
+    </div>
+    <div class="filter" id="filter">
+      <button class="on" data-f="all">all</button>
+      <button data-f="meta">metadata &amp; dates</button>
+      <button data-f="struct">structure &amp; binary</button>
+      <button data-f="crypto">signatures</button>
+      <button data-f="content">content &amp; assets</button>
+      <button data-f="case">email &amp; case-wide</button>
+    </div>
+    <div class="spec">
+      <div class="row" data-g="meta"><div class="id">01</div>
+        <div><h3>Deep metadata extraction &amp; analysis</h3><p class="desc">Full extraction of every metadata store in the file, not only the fields an operating system displays, followed by a comparison of those stores against one another.</p></div>
+        <div class="tech"><div class="k">Artifacts</div><div class="chips"><span>PDF /Info</span><span>XMP packets</span><span>docProps/core.xml</span><span>docProps/app.xml</span><span>OLE SummaryInformation</span><span>EXIF / IPTC</span><span>MP4/MOV atoms</span></div><div class="ex">e.g. XMP and /Info disagree on author and modification date, indicating a later edit by a second tool.</div></div></div>
+
+      <div class="row" data-g="meta"><div class="id">02</div>
+        <div><h3>Software &amp; version identification</h3><p class="desc">Identification of the software, and its version, that created the file and of any software that later opened, re-saved, or edited it.</p></div>
+        <div class="tech"><div class="k">Artifacts</div><div class="chips"><span>Producer / Creator</span><span>xmp:CreatorTool</span><span>AppVersion</span><span>xref &amp; object-stream layout</span><span>compression filters</span><span>generator-specific structures</span></div><div class="ex">e.g. File structure matches a software release that postdates the document’s stated creation date.</div></div></div>
+
+      <div class="row" data-g="struct"><div class="id">03</div>
+        <div><h3>Revision history &amp; recovery of deleted or superseded content</h3><p class="desc">Reconstruction of earlier states of a file and recovery of content that was removed or replaced but remains in the file’s data.</p></div>
+        <div class="tech"><div class="k">Artifacts</div><div class="chips"><span>PDF incremental updates</span><span>prior xref sections</span><span>orphaned objects</span><span>w:rsid values</span><span>tracked changes (w:ins / w:del)</span><span>.doc fast-save remnants</span></div><div class="ex">e.g. Revision 0 of the PDF shows a different payment amount from the one on the produced page.</div></div></div>
+
+      <div class="row" data-g="crypto"><div class="id">04</div>
+        <div><h3>Digital signature verification &amp; cryptographic analysis</h3><p class="desc">Verification of signature integrity, certificate chains, and signing times, and identification of any changes made after signing.</p></div>
+        <div class="tech"><div class="k">Artifacts</div><div class="chips"><span>PKCS#7 / CMS</span><span>/ByteRange coverage</span><span>X.509 chain</span><span>RFC 3161 timestamp tokens</span><span>DocMDP / FieldMDP</span><span>DSS / VRI</span><span>hash digests</span></div><div class="ex">e.g. Signature is cryptographically valid, but two objects were added after signing, outside the signed byte range.</div></div></div>
+
+      <div class="row" data-g="content"><div class="id">05</div>
+        <div><h3>Font analysis &amp; date-consistency testing</h3><p class="desc">Identification of embedded fonts and their versions, checked against the date the document claims.</p></div>
+        <div class="tech"><div class="k">Artifacts</div><div class="chips"><span>embedded font programs</span><span>subset prefixes</span><span>OpenType name / head tables</span><span>font version strings</span><span>glyph coverage</span></div><div class="ex">e.g. The embedded typeface version first shipped with an OS update released after the stated date.</div></div></div>
+
+      <div class="row" data-g="meta"><div class="id">06</div>
+        <div><h3>Date &amp; timestamp analysis</h3><p class="desc">Comparison of three independent sources of time: the metadata, the dates printed in the content, and the timestamps embedded in the file’s binary data.</p></div>
+        <div class="tech"><div class="k">Artifacts</div><div class="chips"><span>metadata dates</span><span>printed / rendered dates</span><span>ZIP entry timestamps (OOXML)</span><span>OLE directory FILETIMEs</span><span>xmpMM:History</span><span>time-zone offsets</span></div><div class="ex">e.g. The printed date is 2021, but internal ZIP entry timestamps place the save in 2023.</div></div></div>
+
+      <div class="row" data-g="struct"><div class="id">07</div>
+        <div><h3>Digital document composition &amp; structure analysis</h3><p class="desc">Analysis of compound documents, such as a PDF declaration with multiple exhibits, in which each exhibit can carry its own artifacts in deep metadata. We separate the file into its source components and examine each one.</p></div>
+        <div class="tech"><div class="k">Artifacts</div><div class="chips"><span>per-page object ranges</span><span>page-level XMP</span><span>/PieceInfo</span><span>ICC profiles</span><span>resource dictionaries</span><span>per-component producers</span></div><div class="ex">e.g. Exhibit C was produced by a different application and on a different date than the other exhibits in the same PDF.</div></div></div>
+
+      <div class="row" data-g="content"><div class="id">08</div>
+        <div><h3>Embedded object, image &amp; duplicate asset analysis</h3><p class="desc">Examination of images and embedded objects, including their own metadata, and identification of assets reused within or across documents.</p></div>
+        <div class="tech"><div class="k">Artifacts</div><div class="chips"><span>image XObjects</span><span>OLE embedded objects</span><span>EXIF thumbnails</span><span>cryptographic hashes</span><span>perceptual hashes</span></div><div class="ex">e.g. The “original” signature image is byte-identical to one embedded in an unrelated 2019 letter.</div></div></div>
+
+      <div class="row" data-g="content"><div class="id">09</div>
+        <div><h3>Scanned document &amp; OCR analysis</h3><p class="desc">Examination of how a scan was produced and whether its text layer matches the page image beneath it.</p></div>
+        <div class="tech"><div class="k">Artifacts</div><div class="chips"><span>scanner / MFP signatures</span><span>OCR engine markers</span><span>invisible text (render mode 3)</span><span>text-to-image alignment</span><span>JBIG2 / CCITT / JPEG</span></div><div class="ex">e.g. The hidden OCR text reads “$12,000” but the page image shows “$72,000”.</div></div></div>
+
+      <div class="row" data-g="case"><div class="id">10</div>
+        <div><h3>Email header, routing &amp; attachment analysis</h3><p class="desc">Analysis of the path a message took, its authentication results, and its attachments.</p></div>
+        <div class="tech"><div class="k">Artifacts</div><div class="chips"><span>Received chain</span><span>Message-ID</span><span>DKIM / ARC</span><span>SPF / DMARC results</span><span>MIME structure</span><span>client X-headers</span><span>attachment hashes</span></div><div class="ex">e.g. The Date header predates the first Received hop by eleven days.</div></div></div>
+
+      <div class="row" data-g="case"><div class="id">11</div>
+        <div><h3>Case-wide correlation &amp; duplicate detection across productions</h3><p class="desc">Comparison of every file across one or more productions to surface duplicates, shared origins, and contradictions.</p></div>
+        <div class="tech"><div class="k">Artifacts</div><div class="chips"><span>SHA-256</span><span>near-duplicate matching</span><span>xmpMM:DocumentID</span><span>xmpMM:InstanceID</span><span>unified timeline</span></div><div class="ex">e.g. Forty-one PDFs in a production share one DocumentID, so they derive from the same source file.</div></div></div>
+
+      <div class="row" data-g="struct"><div class="id">12</div>
+        <div><h3>Byte-level file examination / digital structure analysis</h3><p class="desc">Direct examination of the raw file to find traces that parsers and viewers ignore.</p></div>
+        <div class="tech"><div class="k">Artifacts</div><div class="chips"><span>file signatures</span><span>offset / xref integrity</span><span>data after EOF</span><span>malformed structures</span><span>container internals</span></div><div class="ex">e.g. Data appended after the final %%EOF holds a fragment of an earlier draft.</div></div></div>
+
+      <div class="row" data-g="all-only"><div class="id">13</div>
+        <div><h3>Specialized file types</h3><p class="desc">In-depth analysis on all digital file types, including but not limited to:</p></div>
+        <div class="tech"><div class="ftypes">
+          <div><b>PDF</b><small>incl. signed, scanned, portfolios</small></div>
+          <div><b>Word</b><small>.docx · .doc · .rtf</small></div>
+          <div><b>Excel</b><small>.xlsx · .xls · .csv</small></div>
+          <div><b>PowerPoint</b><small>.pptx · .ppt</small></div>
+          <div><b>Images</b><small>JPG · PNG · HEIC · TIFF</small></div>
+          <div><b>Video</b><small>MP4 · MOV · AVI</small></div>
+          <div><b>Email</b><small>.eml · .msg · .pst</small></div>
+          <div><b>More</b><small>ask about your format</small></div>
+        </div></div></div>
+    </div>
+    <div class="paper-note"><div class="pi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c79b3a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M8 16c1.5-2 2.5 1 4-1s2.5 1 4 0"/></svg></div><div><strong>Paper documents, too.</strong> Through Fisher Forensic Document Laboratory, we also examine physical documents: handwriting and signatures, ink and paper, and alterations to printed originals. Many matters involve both. [Confirm scope with Celeste.]</div></div>
+    <div class="cta-bar"><p>Suspect a document has been altered?</p><a class="btn btn-solid" href="#contact">Get Started →</a></div>
+  </div>
+</section>
+
+<section id="method" class="soft">
+  <div class="wrap">
+    <div class="sec-head"><div><div class="tag">// method</div><h2>Examination workflow</h2></div><p>The same documented sequence for every engagement, so that each finding can be reproduced.</p></div>
+    <div class="method">
+      <div><div class="n">[01] intake</div><h3>Preserve</h3><p>Originals are received according to preservation instructions and hashed (SHA-256) on arrival.</p></div>
+      <div><div class="n">[02] extract</div><h3>Parse</h3><p>Every metadata store, revision, and embedded object is extracted on closed, offline systems.</p></div>
+      <div><div class="n">[03] analyze</div><h3>Correlate</h3><p>Artifacts are compared against each other, the stated facts, and reference data such as software and font release histories.</p></div>
+      <div><div class="n">[04] report</div><h3>Report &amp; testify</h3><p>A written report cites the exact artifacts behind each finding. Expert testimony is available.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><div><div class="tag">// why fddg</div><h2>Built for high-stakes matters</h2></div></div>
+    <div class="why-grid">
+      <div class="why-item"><h3>Below the surface</h3><p>Standard viewers stop at the visible properties. We parse revision layers, signature containers, font programs, and raw structure.</p></div>
+      <div class="why-item"><h3>Closed systems</h3><p>Client files stay on offline systems and are never sent to outside AI services.</p></div>
+      <div class="why-item"><h3>Reproducible findings</h3><p>Each finding cites the artifact, offset, or field it rests on, so it can be checked by opposing experts.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="people">
+  <div class="wrap">
+    <div class="sec-head" id="team"><div><div class="tag">// who you’ll work with</div><h2>The people behind each report</h2></div></div>
+    <div class="people">
+      <div class="person"><div class="ph">Photo</div><h4>[Name]</h4><div class="title">[Title]</div><p>[One or two lines about this person.]</p></div>
+      <div class="person"><div class="ph">Photo</div><h4>[Name]</h4><div class="title">[Title]</div><p>[One or two lines about this person.]</p></div>
+      <div class="person"><div class="ph">Photo</div><h4>[Name]</h4><div class="title">[Title]</div><p>[One or two lines about this person.]</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="soft">
+  <div class="wrap">
+    <div class="sec-head"><div><div class="tag">// faq</div><h2>Technical questions</h2></div></div>
+    <div class="faq">
+      <details><summary>Why do you need the native file and not a printout or scan?</summary><p>Printing or scanning a file discards its metadata, revision layers, fonts, and signature data. Re-saving or forwarding a file can overwrite them. We send preservation instructions before you submit.</p></details>
+      <details><summary>Can you recover content that was deleted?</summary><p>Only when the file still holds it, as with incremental PDF updates, orphaned objects, or legacy Office fast-save data. We report what is recoverable and what is not.</p></details>
+      <details><summary>Does a valid digital signature mean the document is authentic?</summary><p>No. A valid signature shows that the signed byte range has not changed. We also check what falls outside that range, the certificate chain, and the signing time.</p></details>
+      <details><summary>Do you use AI services on client files?</summary><p>No. Files are processed on closed systems and are not sent to outside AI services.</p></details>
+      <details><summary>How long does an examination take?</summary><p>[Standard turnaround to confirm.] Productions and multi-file correlation are scoped individually, and expedited service is available.</p></details>
+      <details><summary>Are findings admissible?</summary><p>Reports are written to support an evidentiary foundation, and testimony is available. Admissibility requirements vary by jurisdiction.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="sec-head"><div><div class="tag">// contact</div><h2>Open a case</h2></div><p>Consultations are free and confidential.</p></div>
+    <div class="inq-layout">
+      <div class="inq-card" id="inquiry"></div>
+      <aside class="inq-aside">
+        <div class="aside-box">
+          <h3>Rather talk it through?</h3>
+          <p>Book a free 15-minute call. We’ll tell you what can be learned from what you have.</p>
+          <a class="btn-aside" href="#">Schedule a Call →</a>
+        </div>
+        <div class="aside-box">
+          <ul class="aside-list">
+            <li><span>Email</span><a href="mailto:info@forensicddg.com">info@forensicddg.com</a></li>
+            <li><span>Phone</span>[(XXX) XXX-XXXX]</li>
+            <li><span>Hours</span>[days, hours] PT</li>
+            <li><span>Response</span>Within 24 hours</li>
+            <li><span>Privacy</span>Files stay between you and your examiner</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="f-top"><img src="FDDG_Logo.png" alt="Forensic Digital Document Group"><div class="f-links"><a href="#">media</a><a href="#contact">contact</a><a href="#">privacy</a><a href="#">terms</a></div></div>
+    <div class="legal">FORENSIC DIGITAL DOCUMENT GROUP™ · A DBA of Fisher Forensic Document Laboratory, a California corporation.<br>© 2026 Fisher Forensic Document Laboratory. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="fddg-mock.js"></script>
+</body>
+</html>
