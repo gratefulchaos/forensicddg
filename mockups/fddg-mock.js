@@ -25,7 +25,7 @@
         <div class="inq-q">What needs to be examined?</div>
         <div class="choice-grid">
           <label class="choice"><input type="radio" name="doc-kind" value="digital" required><span><i>🖥️</i><strong>Digital files</strong><em>PDFs, Office files, images, email, video</em></span></label>
-          <label class="choice"><input type="radio" name="doc-kind" value="paper"><span><i>📜</i><strong>Paper documents</strong><em>Handwriting, signatures, ink, printed originals</em></span></label>
+          <label class="choice"><input type="radio" name="doc-kind" value="paper"><span><i>📜</i><strong>Paper documents</strong><em>Handwriting, signatures, ink, alterations</em></span></label>
           <label class="choice"><input type="radio" name="doc-kind" value="both"><span><i>🗂️</i><strong>Both</strong><em>A mix of digital files and physical originals</em></span></label>
           <label class="choice"><input type="radio" name="doc-kind" value="unsure"><span><i>❔</i><strong>Not sure yet</strong><em>Tell us what you have and we’ll advise</em></span></label>
         </div>
@@ -48,10 +48,12 @@
           <div class="cond-title">Paper documents</div>
           <label class="f">What is the concern? <span class="opt">— select any</span></label>
           <div class="chips-pick">
-            <label class="chip"><input type="checkbox" name="paper-concern" value="Handwriting or signature"><span>Handwriting or signature</span></label>
-            <label class="chip"><input type="checkbox" name="paper-concern" value="Alterations or erasures"><span>Alterations or erasures</span></label>
+            <label class="chip"><input type="checkbox" name="paper-concern" value="Signature"><span>Signature</span></label>
+            <label class="chip"><input type="checkbox" name="paper-concern" value="Handwriting"><span>Handwriting</span></label>
+            <label class="chip"><input type="checkbox" name="paper-concern" value="Altered or added entries"><span>Altered or added entries</span></label>
             <label class="chip"><input type="checkbox" name="paper-concern" value="Ink or paper"><span>Ink or paper</span></label>
-            <label class="chip"><input type="checkbox" name="paper-concern" value="Printed or typed text"><span>Printed or typed text</span></label>
+            <label class="chip"><input type="checkbox" name="paper-concern" value="Indented writing"><span>Indented writing</span></label>
+            <label class="chip"><input type="checkbox" name="paper-concern" value="Typed, printed or copied"><span>Typed, printed or copied</span></label>
             <label class="chip"><input type="checkbox" name="paper-concern" value="Page substitution"><span>Page substitution</span></label>
             <label class="chip"><input type="checkbox" name="paper-concern" value="Other"><span>Other</span></label>
           </div>
@@ -61,14 +63,15 @@
             <label><input type="radio" name="paper-source" value="copy"><span>Only a copy</span></label>
             <label><input type="radio" name="paper-source" value="unsure"><span>Not sure</span></label>
           </div>
-          <div class="hint" id="hint-paper" data-show="copy">Some examinations need the original. Tell us what you have and we’ll tell you what can be done with a copy.</div>
+          <div class="hint" id="hint-paper" data-show="copy">Handwriting can sometimes be compared from a good copy, but ink, paper, and indented-writing tests need the original. Tell us what you have and we’ll advise.</div>
+          <p class="cond-note">Please don’t mail original documents until we’ve spoken. We’ll send instructions for shipping them safely.</p>
         </div>
       </div>
 
       <div class="inq-block">
         <div class="inq-step"><b>2</b>Your matter</div>
         <div class="fields">
-          <div><label class="f">Type of matter</label><select name="inquiry-type"><option value="">Select…</option><option>Civil litigation</option><option>Criminal matter</option><option>Probate / estate</option><option>Family law</option><option>Employment</option><option>Corporate investigation</option><option>Intellectual property</option><option>Real estate</option><option>Other</option></select></div>
+          <div><label class="f">Type of matter</label><select name="inquiry-type"><option value="">Select…</option><option>Wills, trusts &amp; probate</option><option>Financial elder abuse</option><option>Family law</option><option>Business or real estate</option><option>Civil litigation</option><option>Criminal matter</option><option>Employment</option><option>Corporate investigation</option><option>Other</option></select></div>
           <div><label class="f">Deadline <span class="opt">— optional</span></label><input type="text" name="deadline" placeholder="e.g. expert disclosure 15 Jan"></div>
           <div class="full"><label class="f">What would you like to know?</label><textarea required name="details" placeholder="Describe the documents and the question at issue. For example: “Was this agreement really signed in 2019?”"></textarea></div>
         </div>
@@ -76,6 +79,13 @@
 
       <div class="inq-block">
         <div class="inq-step"><b>3</b>How to reach you</div>
+        <label class="f">I am…</label>
+        <div class="seg" style="margin-bottom:1rem">
+          <label><input type="radio" name="role" value="attorney"><span>An attorney or law office</span></label>
+          <label><input type="radio" name="role" value="investigator"><span>A licensed investigator</span></label>
+          <label><input type="radio" name="role" value="with-attorney"><span>Working with an attorney</span></label>
+          <label><input type="radio" name="role" value="other"><span>Other</span></label>
+        </div>
         <div class="fields">
           <div><label class="f">Name</label><input required type="text" name="name" placeholder="Full name"></div>
           <div><label class="f">Email</label><input required type="email" name="email" placeholder="you@example.com"></div>

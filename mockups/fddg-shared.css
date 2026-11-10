@@ -34,6 +34,7 @@
 .cond + .cond{margin-top:.8rem}
 .hint{display:none;margin-top:.7rem;font-size:.82rem;line-height:1.5;color:var(--f-text);background:var(--f-hint-bg);border-radius:8px;padding:.6rem .8rem}
 .hint.show{display:block}
+.cond-note{margin-top:.9rem;font-size:.8rem;color:var(--f-muted);font-style:italic}
 
 /* chip checkboxes (paper concerns) */
 .chips-pick{display:flex;flex-wrap:wrap;gap:.45rem}
