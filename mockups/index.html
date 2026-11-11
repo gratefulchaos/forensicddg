@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>FDDG redesign mockups (draft)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  body{font-family:'Inter',system-ui,sans-serif;background:#f7f8fa;color:#1a1d23;margin:0;padding:48px 24px;line-height:1.6}
+  .wrap{max-width:920px;margin:0 auto}
+  img{height:64px}
+  h1{color:#142943;font-weight:800;letter-spacing:-.02em;margin:24px 0 6px}
+  p.lead{color:#475467;margin:0 0 28px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  a.card{display:block;text-decoration:none;background:#fff;border:1px solid #e5e7eb;border-top:3px solid #1f3a5e;border-radius:10px;padding:22px;color:inherit;box-shadow:0 2px 6px -1px rgba(20,41,67,.1);transition:.2s}
+  a.card:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(20,41,67,.18)}
+  .card b{display:block;color:#142943;font-size:1.1rem;margin-bottom:6px}
+  .card span{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#4d7a51;background:rgba(107,157,110,.1);padding:3px 10px;border-radius:999px;margin-bottom:10px}
+  .card p{color:#475467;font-size:.92rem;margin:0}
+  .note{margin-top:28px;font-size:.88rem;color:#6b7280;border-left:3px solid #6b9d6e;padding-left:14px}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <img src="FDDG_Logo.png" alt="Forensic Digital Document Group">
+  <h1>Homepage redesign: three directions</h1>
+  <p class="lead">Round 2. Both pitch FDDG as one stop for paper and digital documents, with forensic document examination and digital forensics given equal weight. Same content and inquiry form in each; they differ in look and in which side leads.</p>
+  <div class="grid">
+    <a class="card" href="FDDG-Option-A-Counsel.html"><span>Classic</span><b>A · Counsel</b><p>Warm, serif headings, law-firm feel. Paper and digital services side by side in two columns.</p></a>
+    <a class="card" href="FDDG-Option-C-Modern.html"><span>Modern</span><b>C · Modern</b><p>Closest to the current site. Split paper/digital hero, and a Paper / Both / Digital switch on the services.</p></a>
+    <a class="card" href="FDDG-Option-D-Evidence.html"><span>Approved headline</span><b>D · Evidence</b><p>C’s layout, led by the current site’s line “The critical evidence may be in the digital documents.” Digital first, paper right alongside.</p></a>
+  </div>
+  <p class="note">The forms don’t send anything. Text in [brackets] is a placeholder. The paper services and the experience figures come from doclab.com and need confirming before anything goes live.</p>
+</div>
+</body>
+</html>
