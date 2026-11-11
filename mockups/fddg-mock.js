@@ -167,7 +167,7 @@
       if (k === 'paper' || k === 'both') items.push('Instructions for safely shipping paper originals to our laboratory.');
       if (k === 'unsure') items.push('A short call or email to work out what you have and what it needs.');
       $('#thanks-list').innerHTML = items.map(t => `<li>${t}</li>`).join('');
-      $('#thanks-next').textContent = 'An examiner will review it and reply within 24 hours. Next, you’ll receive:';
+      $('#thanks-next').textContent = 'We’ll review it and reply within 24 hours. If it’s something we can help with, we’ll follow up with:';
       form.style.display = 'none';
       $('#thanks').style.display = 'flex';
     });
