@@ -63,6 +63,9 @@
   .split li{font-size:.86rem;font-weight:600;padding:6px 12px;border-radius:999px}
   .split .sp li{background:#fff;border:1px solid #ead9b4;color:var(--gold-deep)}
   .split .sd li{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff}
+  .split .go{display:inline-block;margin-top:18px;font-size:.88rem;font-weight:700;text-decoration:none}
+  .split .sp .go{color:var(--gold-deep)} .split .sd .go{color:#fff}
+  .split .go:hover{text-decoration:underline}
   .split .mid{position:absolute;right:-26px;top:50%;transform:translateY(-50%);z-index:2;width:52px;height:52px;border-radius:50%;background:#fff;border:1px solid var(--line);display:grid;place-items:center;font-weight:800;color:var(--navy-deep);box-shadow:var(--shadow)}
   .hero-stats{display:flex;justify-content:center;gap:48px;flex-wrap:wrap;padding-top:28px;margin-top:40px;border-top:1px solid var(--line)}
   .stat{text-align:center}
@@ -215,7 +218,7 @@
     <div class="hero-top">
       <div class="eyebrow">One stop for every questioned document</div>
       <h1>Whether it’s <span class="p">ink on paper</span> or <span class="d">data in the file</span>, we examine it.</h1>
-      <p class="lead">Forensic Digital Document Group brings board-certified forensic document examination and deep digital document forensics together, so your handwriting, signatures, ink, metadata, and revision history are examined by one team.</p>
+      <p class="lead">Board-certified examination of handwriting, signatures, and ink on paper documents, and deep forensic analysis of digital files. Bring us the one you have.</p>
       <a class="btn btn-solid" href="#contact">Start Your Inquiry</a>
       <a class="btn btn-ghost" href="#services">Explore Services</a>
     </div>
@@ -223,11 +226,13 @@
       <div class="sp">
         <div class="k">Paper</div><h3>Forensic document examination</h3>
         <ul><li>Signatures</li><li>Handwriting</li><li>Alterations</li><li>Ink &amp; paper</li><li>Indented writing</li><li>Printers &amp; copiers</li></ul>
-        <div class="mid">&amp;</div>
+        <a class="go" href="#services" data-go="paper">See paper services →</a>
+        <div class="mid">or</div>
       </div>
       <div class="sd">
         <div class="k">Digital</div><h3>Digital document forensics</h3>
         <ul><li>Deep metadata</li><li>Revision history</li><li>E-signatures</li><li>Dates &amp; fonts</li><li>Email headers</li><li>Whole productions</li></ul>
+        <a class="go" href="#services" data-go="digital">See digital services →</a>
       </div>
     </div>
     <div class="hero-stats">
@@ -245,10 +250,10 @@
   <div class="wrap">
     <div class="sec-head">
       <div class="eyebrow">Our Services</div>
-      <h2>Two disciplines, one examination</h2>
-      <p>Choose a side, or see both. Select “What we examine” on any service for the detail.</p>
+      <h2>What we examine</h2>
+      <p>Pick paper documents or digital files to see just those services. Select “What we examine” on any service for the detail.</p>
     </div>
-    <div class="toggle"><div id="lane-toggle"><button data-v="paper">Paper</button><button data-v="both" class="on">Both</button><button data-v="digital">Digital</button></div></div>
+    <div class="toggle"><div id="lane-toggle"><button data-v="paper">Paper documents</button><button data-v="digital">Digital files</button><button data-v="both" class="on">Show all</button></div></div>
     <div class="lanes" id="lanes">
       <div class="lane paper">
         <div class="lane-head"><h3>Forensic Document Examination</h3><span>Paper</span></div>
@@ -282,9 +287,9 @@
 <section id="bridge">
   <div class="wrap">
     <div class="sec-head">
-      <div class="eyebrow">Where Paper Meets Digital</div>
-      <h2>Most disputes have both a page and a file</h2>
-      <p>One team examining both sides means nothing falls between two experts.</p>
+      <div class="eyebrow">When a Matter Involves Both</div>
+      <h2>Paper and digital, if you need it</h2>
+      <p>Some matters involve a paper document and a digital file. Because we do both, you won’t need to bring in a second expert.</p>
     </div>
     <div class="bridge-grid">
       <div class="bcard"><div class="bar"><span>Ink &amp; signature</span><span>Revision history</span></div><div class="body"><h4>The printout and its file</h4><p>A signed paper contract and the Word file it was printed from. Do the page and the file tell the same story?</p></div></div>
@@ -292,7 +297,7 @@
       <div class="bcard"><div class="bar"><span>Wet ink</span><span>E-signature</span></div><div class="body"><h4>Mixed signing</h4><p>A deal signed partly on paper and partly online. We examine the wet-ink pages and the digital signature record together.</p></div></div>
       <div class="bcard"><div class="bar"><span>Printed pages</span><span>Email headers</span></div><div class="body"><h4>Email printouts</h4><p>A printed email offered as proof. We examine the printout and, where it exists, the original message.</p></div></div>
     </div>
-    <div class="cta-bar"><p>Not sure whether you need paper, digital, or both? Ask us.</p><a class="btn btn-solid" href="#contact">Get Started →</a></div>
+    <div class="cta-bar"><p>Not sure whether yours is a paper question or a digital one? Ask us.</p><a class="btn btn-solid" href="#contact">Get Started →</a></div>
   </div>
 </section>
 
@@ -324,9 +329,9 @@
 
 <section class="soft">
   <div class="wrap">
-    <div class="sec-head"><div class="eyebrow">Why FDDG</div><h2>One team for the whole document</h2></div>
+    <div class="sec-head"><div class="eyebrow">Why FDDG</div><h2>How we work</h2></div>
     <div class="why-grid">
-      <div class="why-item"><h3>Both disciplines</h3><p>Traditional document examination and digital forensics under one roof, in one coordinated report.</p></div>
+      <div class="why-item"><h3>The right specialist</h3><p>Paper documents go to a board-certified document examiner; digital files go to a digital forensics specialist. If a matter needs both, we coordinate it.</p></div>
       <div class="why-item"><h3>Board-certified</h3><p>Examination led by a Diplomate of the Board of Forensic Document Examiners.</p></div>
       <div class="why-item"><h3>Nondestructive</h3><p>Originals are examined without damage, and digital files are never altered.</p></div>
       <div class="why-item"><h3>Confidential</h3><p>We work through counsel to protect privilege. Files stay on closed systems and are never sent to AI services.</p></div>
@@ -338,7 +343,7 @@
   <div class="wrap">
     <div class="sec-head"><div class="eyebrow">F.A.Q.</div><h2>Common questions</h2></div>
     <div class="faq">
-      <details><summary>Do I need my document examined on paper, digitally, or both?</summary><p>Tell us what you have and what the question is. If a paper document has a digital source, or a digital file was printed and signed, we will usually recommend examining both.</p></details>
+      <details><summary>Is my question a paper one or a digital one?</summary><p>If you have the physical document (a signed original, a handwritten will, a check), it’s a paper examination. If you have the file itself (a PDF, a Word document, an email), it’s a digital one. Not sure? Tell us what you have and we’ll point you to the right examination.</p></details>
       <details><summary>Can you work from a copy instead of the original?</summary><p>Handwriting can sometimes be compared from a good copy. Ink, paper, and indented-writing tests need the original. For digital files, we need the native file, not a printout or scan.</p></details>
       <details><summary>Do you work directly with individuals?</summary><p>[Confirm policy.] We work with attorneys and licensed investigators. If your attorney has asked you to find a document examiner, please call us first.</p></details>
       <details><summary>How long does it take?</summary><p>[Standard turnaround to confirm.] It depends on the number of documents and the examinations needed. Expedited service is available.</p></details>
@@ -360,7 +365,7 @@
 
 <section id="contact">
   <div class="wrap">
-    <div class="sec-head"><div class="eyebrow">Contact Us</div><h2>Tell us about your documents</h2><p>Paper, digital, or both. Share as much or as little as you like.</p></div>
+    <div class="sec-head"><div class="eyebrow">Contact Us</div><h2>Tell us about your documents</h2><p>A paper document or a digital file. Share as much or as little as you like.</p></div>
     <div class="inq-layout">
       <div class="inq-card" id="inquiry"></div>
       <aside class="inq-aside">
@@ -399,6 +404,9 @@
     lanes.classList.toggle('only-paper', b.dataset.v === 'paper');
     lanes.classList.toggle('only-digital', b.dataset.v === 'digital');
   });
+  document.querySelectorAll('a.go').forEach(a => a.addEventListener('click', () => {
+    document.querySelector('#lane-toggle button[data-v="' + a.dataset.go + '"]').click();
+  }));
 </script>
 </body>
 </html>
